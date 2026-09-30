@@ -384,7 +384,7 @@ export default function PredictionsPage() {
                     : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                 }`}
               >
-                {league === 'all' ? 'Todas' : league.split(' ')[0]}
+                {league === 'all' ? 'Todas' : league}
               </button>
             ))}
           </div>
