@@ -1,16 +1,21 @@
 export async function GET() {
-  const from = new Date();
-  const to = new Date(Date.now() + 7 * 86400000);
-  const f = (d) => d.toISOString().slice(0, 10);
-  const res = await fetch(
-    `https://v3.football.api-sports.io/fixtures?league=39&season=2026&from=${f(from)}&to=${f(to)}`,
-    { headers: { "x-apisports-key": process.env.API_FOOTBALL_KEY } }
-  );
-  const data = await res.json();
+  const headers = { "x-apisports-key": process.env.API_FOOTBALL_KEY };
+  const base = "https://v3.football.api-sports.io";
+
+  const l = await (await fetch(`${base}/leagues?id=39&current=true`, { headers })).json();
+  const n = await (await fetch(`${base}/fixtures?league=39&next=3`, { headers })).json();
+
+  const s = l.response?.[0]?.seasons?.[0];
   return Response.json({
-    errors: data.errors,
-    results: data.results,
-    primero: data.response?.[0]?.teams,
-    fecha: data.response?.[0]?.fixture?.date,
+    temporada: s && { year: s.year, start: s.start, end: s.end, predicciones: s.coverage?.predictions },
+    errorLiga: l.errors,
+    proximos: n.results,
+    errorProximos: n.errors,
+    primero: n.response?.[0] && {
+      id: n.response[0].fixture.id,
+      fecha: n.response[0].fixture.date,
+      local: n.response[0].teams.home.name,
+      visita: n.response[0].teams.away.name,
+    },
   });
 }
