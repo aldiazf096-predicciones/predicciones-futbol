@@ -421,7 +421,7 @@ export default function PredictionsPage() {
       <div className="max-w-4xl mx-auto px-4 border-t border-gray-800 pt-6 pb-4 text-center text-xs text-gray-500">
         <p className="mb-2">📊 Predicciones basadas en análisis matemático e histórico</p>
         <p className="mb-4">Premium: Análisis completo + Sin publicidad + Notificaciones</p>
-        <p>© 2024 Predicciones.com.mx | Todos los derechos reservados</p>
+        <p>© {new Date().getFullYear()} Predicciones.com.mx | Todos los derechos reservados</p>
       </div>
 
       {showLoginModal && <LoginModal />}
