@@ -262,8 +262,12 @@ export default function PredictionsPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 border-t border-gray-800 mt-8 pt-6 pb-4 text-center text-xs text-gray-500">
-        <p className="mb-2">📊 Predicciones basadas en análisis matemático e histórico</p>
+                <p className="mb-2">📊 Pronósticos generados a partir de estadísticas y datos históricos de partidos</p>
         <p className="mb-4">Premium: próximamente</p>
+        <p className="mb-4 max-w-2xl mx-auto">
+          Contenido informativo y de entretenimiento. Las predicciones no garantizan resultados.
+          Este sitio no es una casa de apuestas ni promueve el juego. Solo para mayores de 18 años.
+        </p>
         <p>© {new Date().getFullYear()} Predicciones.com.mx | Todos los derechos reservados</p>
       </div>
 
