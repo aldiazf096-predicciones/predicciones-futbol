@@ -1,14 +1,12 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { Calendar, Target, Clock, LogOut } from 'lucide-react';
+import { Calendar, Target, Clock } from 'lucide-react';
 
 export default function PredictionsPage() {
   const [activeTab, setActiveTab] = useState('today');
   const [selectedLeague, setSelectedLeague] = useState('all');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isPremium, setIsPremium] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -60,45 +58,20 @@ export default function PredictionsPage() {
     return date.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
   };
 
-  const LoginModal = () => (
+  const PremiumModal = () => (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-8 max-w-md w-full border border-gray-700">
-        <h2 className="text-2xl font-bold mb-6">Acceso Premium</h2>
-
-        <div className="space-y-4 mb-6">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-cyan-500"
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-cyan-500"
-          />
-        </div>
-
-        <button
-          onClick={() => {
-            setIsLoggedIn(true);
-            setIsPremium(true);
-            setShowLoginModal(false);
-          }}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-2 rounded-lg mb-3"
-        >
-          Acceder Premium
-        </button>
-
-        <button
-          onClick={() => setShowLoginModal(false)}
-          className="w-full bg-gray-800 text-white font-bold py-2 rounded-lg"
-        >
-          Cerrar
-        </button>
-
-        <p className="text-center text-sm text-gray-400 mt-4">
-          Premium: $4.99 MXN/mes
+        <h2 className="text-2xl font-bold mb-4">Premium próximamente</h2>
+        <p className="text-gray-300 text-sm mb-6">
+          Estamos preparando una versión Premium con análisis completo, sin publicidad y con notificaciones.
+          Muy pronto estará disponible.
         </p>
+        <button
+          onClick={() => setShowPremiumModal(false)}
+          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-2 rounded-lg"
+        >
+          Entendido
+        </button>
       </div>
     </div>
   );
@@ -176,7 +149,7 @@ export default function PredictionsPage() {
 
         {renderTabContent(match)}
 
-        {isPremium && match.premiumAnalysis && (
+        {match.premiumAnalysis && (
           <div className="mt-4 p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
             <p className="text-xs text-purple-200">
               <strong>Recomendación:</strong> {translateAdvice(match.premiumAnalysis)}
@@ -211,27 +184,12 @@ export default function PredictionsPage() {
                 <p className="text-xs text-gray-400">Análisis de fútbol profesional</p>
               </div>
             </div>
-            <div className="flex gap-2">
-              {!isLoggedIn ? (
-                <button
-                  onClick={() => setShowLoginModal(true)}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:shadow-lg transition"
-                >
-                  Premium
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    setIsLoggedIn(false);
-                    setIsPremium(false);
-                  }}
-                  className="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-700 transition flex items-center gap-2"
-                >
-                  <LogOut size={16} />
-                  Salir
-                </button>
-              )}
-            </div>
+            <button
+              onClick={() => setShowPremiumModal(true)}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:shadow-lg transition"
+            >
+              Premium
+            </button>
           </div>
 
           <div className="flex gap-2 overflow-x-auto pb-2 mb-4 -mx-4 px-4">
@@ -303,19 +261,13 @@ export default function PredictionsPage() {
         ))}
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 mt-8 mb-4">
-        <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 text-center text-gray-500 text-sm">
-          {!isPremium && <p>🔔 Espacio para publicidad de Google Ads</p>}
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-4 border-t border-gray-800 pt-6 pb-4 text-center text-xs text-gray-500">
+      <div className="max-w-4xl mx-auto px-4 border-t border-gray-800 mt-8 pt-6 pb-4 text-center text-xs text-gray-500">
         <p className="mb-2">📊 Predicciones basadas en análisis matemático e histórico</p>
-        <p className="mb-4">Premium: Análisis completo + Sin publicidad + Notificaciones</p>
+        <p className="mb-4">Premium: próximamente</p>
         <p>© {new Date().getFullYear()} Predicciones.com.mx | Todos los derechos reservados</p>
       </div>
 
-      {showLoginModal && <LoginModal />}
+      {showPremiumModal && <PremiumModal />}
     </div>
   );
 }
