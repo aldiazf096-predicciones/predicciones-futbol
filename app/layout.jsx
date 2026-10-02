@@ -1,25 +1,34 @@
 import './globals.css'
 
 export const metadata = {
+  metadataBase: new URL('https://www.predicciones.com.mx'),
   title: 'Predicciones de Fútbol | Análisis Profesional en Español',
-  description: 'Predicciones matemáticas de fútbol en español. Análisis profesional con probabilidades 1X2, Over/Under y Ambos Anotan. Sin publicidad invasiva. Premium a solo $4.99 MXN/mes.',
-  keywords: 'predicciones fútbol, pronosticos deportivos, análisis de partidos, 1x2, over under, predicciones en español',
+  description:
+    'Predicciones de fútbol en español con probabilidades 1X2 y pronóstico de goles para Premier League, La Liga, Serie A, Bundesliga, Ligue 1 y Liga MX.',
   authors: [{ name: 'Predicciones.com.mx' }],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Predicciones de Fútbol | Análisis Profesional',
-    description: 'Predicciones de fútbol con análisis matemático e histórico',
+    description:
+      'Próximos partidos de las principales ligas con probabilidades 1X2 y pronóstico de goles.',
+    url: '/',
+    siteName: 'Predicciones.com.mx',
+    locale: 'es_MX',
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Predicciones de Fútbol',
-    description: 'Análisis profesional de partidos de fútbol',
+    description:
+      'Próximos partidos de las principales ligas con probabilidades 1X2 y pronóstico de goles.',
   },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
+    <html lang="es-MX">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
