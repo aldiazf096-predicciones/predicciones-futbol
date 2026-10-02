@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { Calendar, Target, Clock } from 'lucide-react';
+import Link from 'next/link';
 
 export default function PredictionsPage() {
   const [activeTab, setActiveTab] = useState('today');
@@ -148,6 +149,12 @@ export default function PredictionsPage() {
         </div>
 
         {renderTabContent(match)}
+                <Link
+          href={`/partido/${match.id}`}
+          className="mt-3 block text-sm font-medium text-cyan-300 hover:underline"
+        >
+          Ver previa completa →
+        </Link>
 
         {match.premiumAnalysis && (
           <div className="mt-4 p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
