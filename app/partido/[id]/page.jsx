@@ -231,7 +231,7 @@ export default async function PartidoPage({ params }) {
           <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
             {home} vs {away}
           </h1>
-          <p className="text-sm text-gray-400 mt-2 capitalize">
+<p className="text-sm text-gray-400 mt-2">
             {fecha} · {hora} (hora del centro de México)
           </p>
           {sede && <p className="text-xs text-gray-500 mt-1">{sede}</p>}
