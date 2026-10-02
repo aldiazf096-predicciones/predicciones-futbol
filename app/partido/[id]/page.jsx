@@ -120,7 +120,8 @@ function CompareBar({ label, home, away }) {
 
 function TeamColumn({ name, row, p, side }) {
   const last5 = p?.teams?.[side]?.last_5;
-  const form = row?.form || p?.teams?.[side]?.league?.form;
+  const seasonForm = p?.teams?.[side]?.league?.form;
+  const form = seasonForm || (row?.form ? row.form.split('').reverse().join('') : '');
   const own = side === 'home' ? row?.home : row?.away;
   return (
     <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-4 border border-gray-700">
